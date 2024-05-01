@@ -9,10 +9,22 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        float: {
+          "0%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+          "100%": { transform: " translateY(0px)" },
+        },
+      },
+      animation: {
+        float: "float 5s ease-in-out infinite",
+      },
+    },
   },
   darkMode: "class",
   plugins: [
+    require("@xpd/tailwind-3dtransforms"),
     nextui({
       addCommonColors: true,
       prefix: "nextui", // prefix for themes variables
