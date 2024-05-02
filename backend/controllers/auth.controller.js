@@ -15,7 +15,6 @@ const authUser = tryCatch(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      role: user.role,
     });
   } else {
     throw new CustomError("Invalid email or password", 401);
@@ -23,7 +22,7 @@ const authUser = tryCatch(async (req, res) => {
 });
 
 const registerUser = tryCatch(async (req, res, next) => {
-  const { name, email, mobile, password } = req.body;
+  const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -33,7 +32,6 @@ const registerUser = tryCatch(async (req, res, next) => {
   const user = await User.create({
     name,
     email,
-    mobile,
     password,
   });
 
@@ -44,7 +42,6 @@ const registerUser = tryCatch(async (req, res, next) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      role: user.role,
     });
   } else {
     throw new CustomError("Invalid user data", 400);
@@ -80,7 +77,6 @@ const updateUserProfile = tryCatch(async (req, res, next) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.mobile = req.body.mobile || user.mobile;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -92,7 +88,6 @@ const updateUserProfile = tryCatch(async (req, res, next) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      mobile: updatedUser.mobile,
     });
   } else {
     res.status(404);

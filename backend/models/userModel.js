@@ -14,14 +14,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    mobile: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      default: "student",
-    },
+
     password: {
       type: String,
       required: true,

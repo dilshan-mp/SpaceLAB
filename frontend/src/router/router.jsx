@@ -22,6 +22,7 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
       <Route
@@ -34,8 +35,6 @@ const Router = () => {
       />
 
       <Route path="/earth" element={<Earth />} />
-
-      <Route path="/register" element={<Register />} />
     </Routes>
   );
 };

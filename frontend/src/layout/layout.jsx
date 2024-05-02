@@ -10,31 +10,13 @@ const Layout = () => {
   const location = useLocation();
 
   // to render the alternative Navbar or the default Navbar
-  const showAdminNavbar =
-    location.pathname === "/admin" ||
-    location.pathname === "/users" ||
-    location.pathname === "/hotels" ||
-    location.pathname === "/tours" ||
-    location.pathname === "/vehicle" ||
-    location.pathname === "/train" ||
-    location.pathname === "/adduser" ||
-    location.pathname === "/userpage" ||
-    location.pathname === "/update";
-
-  const showFinaceNavbar =
-    location.pathname === "/finace" ||
-    location.pathname === "/finance/salary" ||
-    location.pathname === "/finance/employee" ||
-    location.pathname === "/finance/salarySheet" ||
-    location.pathname === "/finance/FinanceHealth" ||
-    location.pathname === "/finance/refund" ||
-    location.pathname === "/finance/addRefund" ||
-    location.pathname === "/finance/updateRefund/:id";
+  const hideNavbar =
+    location.pathname === "/login" || location.pathname === "/register";
 
   return (
     <div className="flex-1 relative h-screen flex flex-col">
       <StarsCanvas />
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <div className="flex flex-col md:flex-row justify-center flex-1">
         <Router />
       </div>
