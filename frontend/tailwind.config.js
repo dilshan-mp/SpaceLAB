@@ -16,9 +16,15 @@ module.exports = {
           "50%": { transform: "translateY(-20px)" },
           "100%": { transform: " translateY(0px)" },
         },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(180deg)" },
+          "100%": { transform: " rotate(360deg)" },
+        },
       },
       animation: {
         float: "float 5s ease-in-out infinite",
+        rotate: "rotate 480s linear infinite",
       },
     },
   },
