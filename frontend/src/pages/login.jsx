@@ -33,7 +33,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
 
     await axios
-      .post(`http://localhost:8055/api/user/auth`, formData)
+      .post(`${BASE_URL}/api/user/auth`, formData)
       .then((res) => {
         reset();
         setIsLoading(false);
