@@ -1,4 +1,4 @@
-import { Image, cn } from "@nextui-org/react";
+import { Image, cn, Spinner } from "@nextui-org/react";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -97,6 +97,10 @@ const Login = () => {
                       className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
                       {...register("email", {
                         required: "Email is required!",
+                        pattern: {
+                          message: "Invalid email!",
+                          value: /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/,
+                        },
                       })}
                     />
                     <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -175,7 +179,7 @@ const Login = () => {
                   class="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
                   type="submit"
                 >
-                  Log in
+                  {loading ? <Spinner /> : "Log in"}
                 </button>
               </div>
             </form>
