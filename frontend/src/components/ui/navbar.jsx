@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
+  Link,
   NavbarMenuItem,
   NavbarMenuToggle,
   NavbarMenu,
@@ -16,6 +16,8 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {
   ChevronDown,
   Lock,
@@ -24,10 +26,16 @@ import {
   Server,
   TagUser,
   Scale,
+  LogoutIcon,
 } from "../../assets/icons/incons";
+import { AuthContext } from "../../context/authContext";
 
 const MyNavbar = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  console.log(pathname);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -41,6 +49,7 @@ const MyNavbar = () => {
     "Log Out",
   ];
 
+  console.log(user);
   const icons = {
     chevron: <ChevronDown fill="currentColor" size={16} />,
     scale: <Scale className="text-warning" fill="currentColor" size={30} />,
@@ -70,16 +79,76 @@ const MyNavbar = () => {
         </p>
       </NavbarBrand>
 
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+      {user && (
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavbarItem isActive={pathname == "/picture-of-the-day"}>
+            <Link
+              color={
+                pathname == "/picture-of-the-day" ? "primary" : "foreground"
+              }
+              onClick={() => navigate("/picture-of-the-day")}
+              className="cursor-pointer"
+            >
+              APOD
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive={pathname == "/earth"}>
+            <Link
+              color={pathname == "/earth" ? "primary" : "foreground"}
+              onClick={() => navigate("/earth")}
+              aria-current="page"
+              className="cursor-pointer"
+            >
+              EARTH
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive={pathname == "/epic"}>
+            <Link
+              color={pathname == "/epic" ? "primary" : "foreground"}
+              onClick={() => navigate("/epic")}
+              aria-current="page"
+              className="cursor-pointer"
+            >
+              EPIC
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+      )}
+
+      {!user ? (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden lg:flex">
+            <Link href="/login" className="font-bold">
+              Login
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              as={Link}
+              color="primary"
+              className="font-bold"
+              href="#"
+              variant="flat"
+            >
+              Sign Up
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      ) : (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden lg:flex">
+            <Button
+              color="default"
+              variant="faded"
+              className="font-bold"
+              onClick={logout}
+              endContent={<LogoutIcon />}
+            >
+              Logout
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      )}
     </Navbar>
   );
 };

@@ -6,12 +6,15 @@ import {
   EyeSlashFilledIcon,
   MailIcon,
 } from "../assets/icons/incons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { AuthContext } from "../context/authContext";
+import { Meteors } from "../components/ui/meteors";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +39,7 @@ const Login = () => {
         setIsLoading(false);
         console.log(res);
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -44,10 +48,17 @@ const Login = () => {
 
   return (
     <div className=" text-white flex flex-1 flex-col items-center pt-16 sm:justify-center sm:pt-0 z-10">
+      <Meteors number={2} />
+
       <a href="#">
         <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto flex items-center gap-2">
           <div className="flex items-center">
-            <Image width={50} height={50} src="./logo.png" />
+            <Image
+              width={50}
+              height={50}
+              src="./logo.png"
+              className={isLoading && " animate-spin"}
+            />
             <p className="font-bold text-inherit ml-2 text-4xl">
               Space
               <span className="font-[700] bg-clip-text  text-transparent bg-gradient-to-r from-purple-500 to-cyan-500">

@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { BackgroundBoxesDemo } from "../components/common/color-box";
 import { AuthContext } from "../context/authContext";
+import AstronomyImage from "../pages/astromonyImage";
+import Earth from "../pages/earth";
+import Epic from "../pages/epic";
+import Home from "../pages/home";
 import Login from "../pages/login";
 import Register from "../pages/register";
-import Home from "../pages/home";
 import ResetPassword from "../pages/resetPassword";
-import Profile from "../pages/profile";
-import Earth from "../pages/earth";
+import TestPage from "../pages/testPage";
 
 const Router = () => {
   const ProtectedRoute = ({ children }) => {
@@ -24,17 +27,44 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/backgroundBoxesDemo" element={<BackgroundBoxesDemo />} />
+      <Route path="/test-page" element={<TestPage />} />
 
       <Route
-        path="/profile"
+        path="/earth"
         element={
           <ProtectedRoute>
-            <Profile />
+            <Earth />
           </ProtectedRoute>
         }
       />
 
-      <Route path="/earth" element={<Earth />} />
+      <Route
+        path="/epic"
+        element={
+          <ProtectedRoute>
+            <Epic />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/picture-of-the-day"
+        element={
+          <ProtectedRoute>
+            <AstronomyImage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/earth"
+        element={
+          <ProtectedRoute>
+            <Earth />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };

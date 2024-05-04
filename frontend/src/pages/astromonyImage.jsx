@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { API_KEY } from "../constants";
+import { parseDate } from "@internationalized/date";
+import { compareAsc, format } from "date-fns";
 import useFetch from "../hooks/useFetch";
 import {
   Card,
@@ -8,19 +10,39 @@ import {
   CardFooter,
   Image,
   Button,
+  Pagination,
+  DatePicker,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@nextui-org/react";
 import Container from "../components/common/container";
 import Video from "../components/common/video";
 
 const AstronomyImage = () => {
-  const { data, error, loading } = useFetch(
-    `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [value, setValue] = useState(parseDate("2023-05-01"));
+  const { data, error, loading, reFetch } = useFetch(
+    `https://api.nasa.gov/planetary/apod?date=${format(
+      new Date(value),
+      "yyyy-MM-dd"
+    )}&api_key=${API_KEY}`
   );
 
   console.log(data);
 
+  const onOk = () => {
+    reFetch();
+  };
+
   return (
     <Container>
+      <div>
+        <Button onPress={onOpen}>Set Date</Button>
+      </div>
       <div className="mt-8 z-20 flex flex-col xl:flex-row gap-20 flex-1 items-center ">
         <div className="w-full lg:3/5 drop-shadow-[0_25px_35px_rgba(6,182,212,0.25)]">
           <Card isFooterBlurred className="w-full">
@@ -64,6 +86,41 @@ const AstronomyImage = () => {
           </p>
         </div>
       </div>
+      <Pagination showControls total={10} initialPage={1} className="z-20" />
+
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="dark">
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Modal Title
+              </ModalHeader>
+              <ModalBody>
+                <DatePicker
+                  label="Date"
+                  labelPlacement="outside"
+                  // className="max-w-md"
+                  description={
+                    "Beginning of 30 day date range that will be used to look for closest image to that date."
+                  }
+                  value={value}
+                  onChange={setValue}
+                  variant="underlined"
+                  className=" text-black"
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onOk}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
