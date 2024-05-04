@@ -18,6 +18,10 @@ app.use(cors());
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json("Server is running 👌");
+});
+
 app.use("/api/user", authRoutes);
 
 app.use(errorHandler);
