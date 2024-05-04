@@ -1,47 +1,116 @@
 import { parseDate } from "@internationalized/date";
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Autocomplete, AutocompleteItem, Pagination } from "@nextui-org/react";
 import { API_KEY } from "../constants";
 import useFetch from "../hooks/useFetch";
-import { DatePicker, Image } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  DatePicker,
+  Image,
+} from "@nextui-org/react";
 import Container from "../components/common/container";
 
+const cameras = [
+  { label: "FHAZ", value: "fhaz" },
+  { label: "RHAZ", value: "rhaz" },
+  { label: "NAVCAM", value: "navcam" },
+  { label: "MAST", value: "mast" },
+];
+
 const Epic = () => {
-  const [value, setValue] = useState(parseDate("2019-05-30"));
+  const [camera, setCamera] = useState("fhaz");
+  const [page, setPage] = useState(1);
+  const [itemsPerPage] = useState(10); // Change this value as per your requirement
+  const [dataList, setDataList] = useState([]);
+
+  const indexOfLastItem = page * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems =
+    dataList && dataList.slice(indexOfFirstItem, indexOfLastItem);
+
   const { data, loading, reFetch } = useFetch(
-    `https://api.nasa.gov/EPIC/api/natural/date/2019-05-30?api_key=${API_KEY}`
+    `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${API_KEY}`
   );
 
-  // const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${date.replace(
-  //   /-/g,
-  //   "/"
-  // )}/jpg/${image.image}.jpg`;
+  console.log(data.photos);
 
-  console.log("data >>", data);
+  useEffect(() => {
+    setDataList(data.photos);
+  }, [data.photos]);
 
   return (
     <Container>
-      <div>
-        <DatePicker
-          label="Date"
-          labelPlacement="outside"
-          // className="max-w-md"
-          description={
-            "Beginning of 30 day date range that will be used to look for closest image to that date."
-          }
-          value={value}
-          onChange={setValue}
+      <div className="grid grid-cols-3 gap-4 w-full mb-10">
+        <Autocomplete
           variant="underlined"
-          className=" text-black"
-        />
+          label="Cameras"
+          labelPlacement="outside"
+          defaultSelectedKey={cameras[0]}
+          placeholder="Search a camera"
+          className="dark"
+          onSelectionChange={(e) => setCamera(e)}
+        >
+          {cameras.map((camera) => (
+            <AutocompleteItem key={camera.value} value={camera.value}>
+              {camera.label}
+            </AutocompleteItem>
+          ))}
+        </Autocomplete>
       </div>
-      <div>
-        <Image
-          width={300}
-          alt="NextUI hero Image"
-          src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
-        />
+      <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
+        {currentItems &&
+          currentItems.map((object) => (
+            <Card isFooterBlurred className="h-[300px]">
+              <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <p className="text-tiny text-white/60 uppercase font-bold">
+                  {object.rover.landing_date}
+                </p>
+                <h4 className="text-white/90 font-medium text-xl">
+                  Your checklist for better sleep
+                </h4>
+              </CardHeader>
+              <img
+                // removeWrapper
+                alt="Relaxing app background"
+                className="z-0 w-full h-full object-cover"
+                src={object.img_src}
+              />
+              <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
+                <div className="flex flex-grow gap-2 items-center">
+                  <Image
+                    alt="Breathing app icon"
+                    className="rounded-full w-10 h-11 bg-black"
+                    src={object.img_src}
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-tiny text-white/60">Breathing App</p>
+                    <p className="text-tiny text-white/60">
+                      Get a good night's sleep.
+                    </p>
+                  </div>
+                </div>
+                <Button radius="full" size="sm">
+                  Get App
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
       </div>
+      {dataList && (
+        <div className="grid place-items-center p-4">
+          <Pagination
+            showControls
+            total={Math.ceil(dataList.length / 10)}
+            initialPage={1}
+            isCompact
+            onChange={(pageNumber) => setPage(pageNumber)}
+          />
+        </div>
+      )}
     </Container>
   );
 };
