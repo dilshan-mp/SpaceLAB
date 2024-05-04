@@ -1,4 +1,5 @@
 import { Button, Image } from "@nextui-org/react";
+import { ToastContainer, toast } from "react-toastify";
 import React from "react";
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
           className="object-contain rotate-270 absolute top-0 right-[-80px] "
         />
       </div>
-
+      <ToastContainer />
       <div className="w-1/2 justify-center text-center grid place-items-center relative">
         <div className=" w-fit relative ">
           <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />

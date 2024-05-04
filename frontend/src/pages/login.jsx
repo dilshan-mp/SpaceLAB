@@ -23,6 +23,7 @@ const Login = () => {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
   } = useForm();
 
@@ -37,14 +38,24 @@ const Login = () => {
       .post(`${BASE_URL}/api/user/auth`, formData)
       .then((res) => {
         reset();
-        setIsLoading(false);
+
         console.log(res);
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         navigate("/");
       })
       .catch((error) => {
+        setError("email", {
+          type: "custom",
+          message: error.response.data.message,
+        });
+        setError("password", {
+          type: "custom",
+          message: error.response.data.message,
+        });
         console.log(error);
+        setIsLoading(false);
       });
+    setIsLoading(false);
   };
 
   return (
@@ -178,8 +189,9 @@ const Login = () => {
                 <button
                   class="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
                   type="submit"
+                  disabled={isLoading}
                 >
-                  {loading ? <Spinner /> : "Log in"}
+                  {isLoading ? <Spinner /> : "Log in"}
                 </button>
               </div>
             </form>
