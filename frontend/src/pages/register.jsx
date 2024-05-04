@@ -8,6 +8,7 @@ import {
 } from "../assets/icons/incons";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../constants";
 
 const Register = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,7 +27,7 @@ const Register = () => {
 
     try {
       await axios
-        .post(`http://localhost:8055/api/user/register`, formData)
+        .post(`${BASE_URL}/api/user/register`, formData)
         .then(() => {
           reset();
         })

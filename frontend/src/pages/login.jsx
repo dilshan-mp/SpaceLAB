@@ -11,6 +11,7 @@ import axios from "axios";
 
 import { AuthContext } from "../context/authContext";
 import { Meteors } from "../components/ui/meteors";
+import { BASE_URL } from "../constants";
 
 const Login = () => {
   const navigate = useNavigate();
