@@ -74,6 +74,18 @@ npm start
 npm run dev
 ```
 
+## Running Tests
+
+### Unit Testing
+
+Our project utilizes Vitest and React Testing Library for robust testing of our frontend components. These testing libraries allow us to thoroughly test the functionality and user interactions of our application, ensuring high quality and reliability across different scenarios. With Vitest's powerful features and React Testing Library's intuitive APIs, we can confidently validate the behavior of our frontend codebase, providing a seamless user experience.
+
+- To run unit tests, use the following command:(Ensure that you are in root folder)
+
+```bash
+npm test
+```
+
 ## Additional Notes
 
 - Ensure MongoDB is running before starting the server.
