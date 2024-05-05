@@ -15,14 +15,14 @@ import {
 import Container from "../components/common/container";
 
 const cameras = [
-  { label: "FHAZ", value: "fhaz" },
-  { label: "RHAZ", value: "rhaz" },
-  { label: "NAVCAM", value: "navcam" },
-  { label: "MAST", value: "mast" },
+  { label: "Front Hazard Avoidance Camera", value: "fhaz" },
+  { label: "Rear Hazard Avoidance Camera", value: "rhaz" },
+  { label: "Navigation Camera", value: "navcam" },
+  { label: "Mast Camera", value: "mast" },
 ];
 
 const Epic = () => {
-  const [camera, setCamera] = useState("fhaz");
+  const [camera, setCamera] = useState("mast");
   const [page, setPage] = useState(1);
   const [itemsPerPage] = useState(10); // Change this value as per your requirement
   const [dataList, setDataList] = useState([]);
@@ -33,7 +33,7 @@ const Epic = () => {
     dataList && dataList.slice(indexOfFirstItem, indexOfLastItem);
 
   const { data, loading, reFetch } = useFetch(
-    `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${API_KEY}`
+    `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=${camera}&api_key=${API_KEY}`
   );
 
   console.log(data.photos);

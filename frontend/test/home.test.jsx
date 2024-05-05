@@ -2,20 +2,25 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Home from "../src/pages/home";
 
-describe("Home page", () => {
-  it("Renders default error state.", () => {
+describe("Home component", () => {
+  test("renders without crashing", () => {
     render(<Home />);
-
-    expect(screen.getByTestId("moon-image"));
     const moonImage = screen.getByTestId("moon-image");
+    const exploreButton = screen.getByTestId("explore-button");
+    const spacemanImage = screen.getByTestId("spaceman");
 
-    // Check if the image is loaded
     expect(moonImage).toBeInTheDocument();
+    expect(exploreButton).toBeInTheDocument();
+    expect(spacemanImage).toBeInTheDocument();
   });
 
-  it("Explore Button check", () => {
+  test("explore button is clickable", () => {
     render(<Home />);
     const exploreButton = screen.getByTestId("explore-button");
-    expect(exploreButton).toBeInTheDocument();
+    expect(exploreButton).toBeEnabled();
+    exploreButton.click();
+    // Add assertions based on the behavior triggered by the button click
   });
+
+  // Add more test cases as needed
 });

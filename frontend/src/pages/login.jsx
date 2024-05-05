@@ -103,7 +103,7 @@ const Login = () => {
                       type="text"
                       name="email"
                       placeholder="Email"
-                      autocomplete="off"
+                      autoComplete="off"
                       variant="underlined"
                       className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
                       {...register("email", {
@@ -136,7 +136,7 @@ const Login = () => {
                         type={isVisible ? "text" : "password"}
                         name="password"
                         placeholder="Password"
-                        autocomplete="off"
+                        autoComplete="off"
                         className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
                         {...register("password", {
                           required: "Password is required!",
@@ -191,7 +191,7 @@ const Login = () => {
                   type="submit"
                   disabled={isLoading}
                 >
-                  {isLoading ? <Spinner /> : "Log in"}
+                  {isLoading ? <Spinner data-testid="spinner" /> : "Log in"}
                 </button>
               </div>
             </form>

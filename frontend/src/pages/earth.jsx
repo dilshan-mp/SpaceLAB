@@ -67,6 +67,7 @@ const Earth = () => {
           <div className="backdrop-blur-sm md:p-4 md:[transform:rotateY(-30deg)] group transition-transform">
             <div>
               <DatePicker
+                data-testid="Date"
                 label="Date"
                 labelPlacement="outside"
                 // className="max-w-md"
@@ -82,6 +83,7 @@ const Earth = () => {
 
             <div>
               <Slider
+                data-testid="Longitude"
                 orientation="horizontal"
                 label="Longitude"
                 size="sm"
@@ -103,6 +105,7 @@ const Earth = () => {
               />
 
               <Slider
+                data-testid="Latitude"
                 orientation="horizontal"
                 label="Latitude"
                 size="sm"

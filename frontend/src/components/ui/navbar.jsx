@@ -117,7 +117,7 @@ const MyNavbar = () => {
 
       {!user ? (
         <NavbarContent justify="end">
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem>
             <Link href="/login" className="font-bold">
               Login
             </Link>
