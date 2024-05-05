@@ -4,9 +4,9 @@
 
 SpaceLAB is a dynamic React web application that utilizes NASA's APIs to provide users with a captivating journey through space. Users can seamlessly navigate through captivating imagery sourced from NASA's Mars Rover Photos, Astronomy Picture of the Day, and Earth imagery APIs.
 
-Built with a strong emphasis on functional components, SpaceSnap offers a user-friendly interface that makes exploring the cosmos a breeze. Enhancing the experience further is a sleek CSS framework that ensures both style and usability.
+Built with a strong emphasis on functional components, SpaceLAB offers a user-friendly interface that makes exploring the cosmos a breeze. Enhancing the experience further is a sleek CSS framework that ensures both style and usability.
 
-SpaceSnap isn't just about viewing images—it's about embarking on a journey of discovery. So, whether you're a space enthusiast or simply curious about the universe, dive into SpaceSnap and let the cosmos unfold before your eyes.
+SpaceLAB isn't just about viewing images—it's about embarking on a journey of discovery. So, whether you're a space enthusiast or simply curious about the universe, dive into SpaceLAB and let the cosmos unfold before your eyes.
 
 ## Technologies
 
@@ -17,7 +17,7 @@ SpaceSnap isn't just about viewing images—it's about embarking on a journey of
 
 ## Hosted Web Application
 
-[SpaceSnap Web Application](https://space-lab-web.vercel.app/)
+[SpaceLAB Web Application](https://space-lab-web.vercel.app/)
 
 ## Setup Instructions
 
