@@ -111,7 +111,7 @@ const MyNavbar = () => {
               aria-current="page"
               className="cursor-pointer"
             >
-              EPIC
+              MARS
             </Link>
           </NavbarItem>
         </NavbarContent>

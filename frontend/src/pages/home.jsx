@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="flex flex-1 bg-gradient-to-tr from-indigo-700/20 justify-center">
       <div className="flex flex-1 relative max-w-screen-xl ">
-        <div className="absolute min-[1600px]:w-[600px] md:w-[400px] md:h-[600px] md:top-[-50px] w-[300px] h-[500px] top-[-40px] right-0 overflow-hidden">
+        <div className="absolute min-[1600px]:w-[600px] md:w-[400px] md:h-[600px] md:top-[-50px] w-[300px] h-[500px] top-[-40px] right-0 xl:overflow-visible overflow-hidden">
           <img
             data-testid="moon-image"
             src="./moon.png"
@@ -32,7 +32,7 @@ const Home = () => {
             </Button>
           </div>
         </div>
-        <div className="w-1/2 h-full grid sm:place-items-center relative ">
+        <div className="w-1/2 h-fit grid sm:place-items-center relative mt-20">
           <Image
             data-testid="spaceman"
             src="./spaceman.png"
