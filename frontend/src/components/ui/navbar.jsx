@@ -74,6 +74,15 @@ const MyNavbar = () => {
 
       {user && (
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavbarItem isActive={pathname == "/"}>
+            <Link
+              color={pathname == "/" ? "primary" : "foreground"}
+              onClick={() => navigate("/")}
+              className="cursor-pointer"
+            >
+              Home
+            </Link>
+          </NavbarItem>
           <NavbarItem isActive={pathname == "/picture-of-the-day"}>
             <Link
               color={

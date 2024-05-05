@@ -41,7 +41,7 @@ const AstronomyImage = () => {
   return (
     <Container>
       <div>
-        <Button onPress={onOpen}>Set Date</Button>
+        <Button onPress={onOpen}>Search by Date</Button>
       </div>
       <div className="mt-8 z-20 flex flex-col xl:flex-row gap-20 flex-1 items-center ">
         <div className="w-full lg:3/5 drop-shadow-[0_25px_35px_rgba(6,182,212,0.25)]">
@@ -58,7 +58,7 @@ const AstronomyImage = () => {
               loading={loading}
               removeWrapper
               alt="Relaxing app background"
-              className="z-0 h-[600px] object-cover "
+              className="z-0 h-[550px] object-cover "
               src={data.url}
             />
             <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
@@ -77,7 +77,7 @@ const AstronomyImage = () => {
             </CardFooter>
           </Card>
         </div>
-        <div className="w-full xl:w-2/5 xl:min-h-[600px]">
+        <div className="w-full xl:w-2/5 h-full">
           <h1 className="mb-6 break-words text-5xl text-transparent font-semibold xl:text-center bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
             Astronomy Picture of the Day
           </h1>
@@ -86,37 +86,28 @@ const AstronomyImage = () => {
           </p>
         </div>
       </div>
-      <Pagination showControls total={10} initialPage={1} className="z-20" />
+      {/* <Pagination showControls total={10} initialPage={1} className="z-20" /> */}
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="dark">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
+              <ModalHeader className="flex flex-col gap-1 text-white">
+                Select date
               </ModalHeader>
               <ModalBody>
                 <DatePicker
                   label="Date"
                   labelPlacement="outside"
                   // className="max-w-md"
-                  description={
-                    "Beginning of 30 day date range that will be used to look for closest image to that date."
-                  }
+                  description={"You can see the best picture in specific day."}
                   value={value}
                   onChange={setValue}
                   variant="underlined"
                   className=" text-black"
                 />
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onOk}>
-                  Action
-                </Button>
-              </ModalFooter>
+              <ModalFooter></ModalFooter>
             </>
           )}
         </ModalContent>
