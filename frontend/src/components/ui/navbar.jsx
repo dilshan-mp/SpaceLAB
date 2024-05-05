@@ -1,32 +1,25 @@
-import React, { useContext, useState } from "react";
 import {
+  Button,
+  Image,
+  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Button,
-  Link,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  Image,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
 } from "@nextui-org/react";
+import React, { useContext, useState } from "react";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-  ChevronDown,
-  Lock,
   Activity,
+  ChevronDown,
   Flash,
+  Lock,
+  LogoutIcon,
+  Scale,
   Server,
   TagUser,
-  Scale,
-  LogoutIcon,
 } from "../../assets/icons/incons";
 import { AuthContext } from "../../context/authContext";
 
