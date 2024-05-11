@@ -6,6 +6,7 @@ import { compareAsc, format } from "date-fns";
 import { Image, Slider, DatePicker, Skeleton } from "@nextui-org/react";
 import Container from "../components/common/container";
 import Video from "../components/common/video";
+import Loading from "../components/common/loading";
 
 const Earth = () => {
   const [value, setValue] = useState(parseDate("2018-01-01"));
@@ -44,24 +45,28 @@ const Earth = () => {
         <Video />
       </div>
       <div className="flex flex-col flex-1 items-center w-full z-10 md:flex-row gap-10">
-        <div className="md:w-1/2 w-full flex justify-center h-[500px] md:perspective-1600 ">
-          <Skeleton
-            isLoaded={!loading}
-            className="rounded-lg h-full md:[transform:rotateY(30deg)] w-full"
-          >
-            <Image
-              removeWrapper
-              className=" h-full w-full object-cover md:[transform:rotateY(30deg)]"
-              src={data.url}
-              alt="Image"
-            />
-            {!data && (
-              <div className="rounded-lg h-full w-full">
-                <h1>No imagery for specified date!</h1>
-              </div>
-            )}
-          </Skeleton>
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="md:w-1/2 w-full flex justify-center h-[500px] md:perspective-1600 ">
+            <Skeleton
+              isLoaded={!loading}
+              className="rounded-lg h-full md:[transform:rotateY(30deg)] w-full"
+            >
+              <Image
+                removeWrapper
+                className=" h-full w-full object-cover md:[transform:rotateY(30deg)]"
+                src={data.url}
+                alt="Image"
+              />
+              {!data && (
+                <div className="rounded-lg h-full w-full">
+                  <h1>No imagery for specified date!</h1>
+                </div>
+              )}
+            </Skeleton>
+          </div>
+        )}
 
         <div className="w-full md:w-1/2 md:h-[500px] md:gap-0 rounded-lg md:perspective-1600">
           <div className="backdrop-blur-sm md:p-4 md:[transform:rotateY(-30deg)] group transition-transform">

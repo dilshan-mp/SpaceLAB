@@ -8,6 +8,8 @@ import {
 } from "../assets/icons/incons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { AuthContext } from "../context/authContext";
 import { Meteors } from "../components/ui/meteors";
@@ -39,7 +41,7 @@ const Login = () => {
       .then((res) => {
         reset();
 
-        console.log(res);
+        toast("logging successful");
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         navigate("/");
       })

@@ -4,6 +4,7 @@ import Router from "../router/router";
 import { AuthContext } from "../context/authContext";
 import Navbar from "../components/ui/navbar";
 import StarsCanvas from "../components/common/StarBackground";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   const { user } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const Layout = () => {
       <div className="flex flex-col md:flex-row justify-center flex-1">
         <Router />
       </div>
+      <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
     </div>
   );
 };
