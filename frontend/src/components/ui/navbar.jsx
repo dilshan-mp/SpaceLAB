@@ -64,7 +64,7 @@ const MyNavbar = () => {
     >
       <NavbarBrand>
         <Image width={40} height={40} src="./logo.png" />
-        <p className="font-bold text-inherit ml-2 text-xl">
+        <p className="ml-2 text-xl font-bold text-inherit">
           Space
           <span className="font-[800] bg-clip-text  text-transparent bg-gradient-to-r from-purple-500 to-cyan-500">
             LAB
@@ -73,7 +73,7 @@ const MyNavbar = () => {
       </NavbarBrand>
 
       {user && (
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarContent className="hidden gap-4 sm:flex" justify="center">
           <NavbarItem isActive={pathname == "/"}>
             <Link
               color={pathname == "/" ? "primary" : "foreground"}
@@ -131,6 +131,7 @@ const MyNavbar = () => {
               className="font-bold"
               href="#"
               variant="flat"
+              onClick={() => navigate("/register")}
             >
               Sign Up
             </Button>
